@@ -48,3 +48,13 @@ python3 manage.py createsuperuser
 # Mysql 실행
 service mysql start
 mysql -p 
+
+# Pull 시 충돌날경우 해결(기존 작업하던 내용과 충돌나기때문)
+1.새 브런치 생성 후 선택
+2.커밋(커밋 후 푸시는 안해도됨)
+3.master 브런치 선택
+4.pull
+
+
+# Cursor
+1.pip install PyMySQL
