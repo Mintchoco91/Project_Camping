@@ -58,3 +58,9 @@ mysql -p
 
 # Cursor
 1.pip install PyMySQL
+<<<<<<< HEAD
+=======
+# 구기원 바보
+
+##@#@#
+>>>>>>> 38e932766ab8f467dfd6182458cd1330979cf900
