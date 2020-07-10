@@ -10,17 +10,7 @@ def index(request):
 def product(request):
     return render(request, 'camper/product.html')
 
-def connectDb():
-    # Connect to the database
-    connection = pymysql.connect(host='enqhzd10cxh7hv2e.cbetxkdyhwsb.us-east-1.rds.amazonaws.com',
-                                 user='e4yml2sku68njthx',
-                                 password='o751zmjlxv9qmnmu',
-                                 db='udm84d8ce234i5di',
-                                 charset='utf8mb4')
-    return connection
-
 def db_selectTable(tableName):
-    connection = connectDb()
     try:
         curs = connection.cursor()
         sql = "select * from MEMBER"
@@ -40,7 +30,6 @@ def db_selectTable(tableName):
 
 def db_insertMember(user_id, user_pw, user,name):
     result = "false"
-    connection = connectDb()
     try:
         #SELECT 해서 마지막 ID 가져오는 쿼리 추가할것
         
