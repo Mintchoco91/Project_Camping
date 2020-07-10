@@ -60,3 +60,5 @@ mysql -p
 1.pip install PyMySQL
 
 ##@#@#
+
+#이준호
