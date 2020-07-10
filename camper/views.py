@@ -1,5 +1,6 @@
 from django.shortcuts import render
-import pymysql
+from django.db import connection
+
 
 
 # Create your views here.
@@ -57,12 +58,25 @@ def db_insertMember(user_id, user_pw, user,name):
     return result
 
 #Board 초기 페이지
-def board(request):    
-    results = db_selectTable("MEMBER")
-    #result = db_insertMember()
-    #print(results)
+# def board(request):    
+#     results = db_selectTable("MEMBER")
+#     #result = db_insertMember()
+#     #print(results)
     
-    for row in results:
-        print(row)
+#     for row in results:
+#         print(row)
 
-    return render(request, 'camper/board.html',)
+#     return render(request, 'camper/board.html',)
+
+
+def board(request):
+    cursor = connection.cursor()
+    sql = "select * from MEMBER"
+    cursor.execute(sql)
+    rows = cursor.fetchall()
+    members = []
+    for row in rows:
+        dic = {'id': row[1], 'name': row[3]}
+        members.append(dic)
+    print(members)
+    return render(request, 'camper/board.html', {'members': members})
