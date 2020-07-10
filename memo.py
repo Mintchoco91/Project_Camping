@@ -58,7 +58,3 @@ mysql -p
 
 # Cursor
 1.pip install PyMySQL
-
-##@#@#
-
-#이준호 바보
