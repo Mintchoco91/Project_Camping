@@ -1,5 +1,8 @@
-1. 변경내용 초기화
+1. 변경내용 초기화(commit 한 내용들)
 git reset --hard
+
+1_1. 변경내용 초기화(commit 하지 않은 변경파일들 전부 삭제)
+git clean -f 
 
 2. 원격 브랜치 목록 동기화
 git remote update --prune
