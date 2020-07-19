@@ -4,8 +4,9 @@ git reset --hard
 2. 원격 브랜치 목록 동기화
 git remote update --prune
 
-3. 목록 확인
-git branch -a  
+3. 브랜치 목록 확인
+git branch -r    //원격 브랜치 목록
+git branch -l    //로컬 브랜치 목록
 
 4. checkout 으로 최신브랜치 가져옴
 git checkout [브랜치명]
