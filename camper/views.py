@@ -69,3 +69,15 @@ def board(request):
         members.append(dic)
     print(members)
     return render(request, 'camper/board.html', {'members': members})
+
+
+def productList(request):
+    cursor = connection.cursor()
+    sql = "select * from PRODUCT"
+    cursor.execute(sql)
+    rows = cursor.fetchall()
+    images = []
+    for row in rows:
+        images.append(row[4])
+    print(images)
+    return render(request, 'camper/product_list.html', {'images': images})
