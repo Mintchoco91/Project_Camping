@@ -1,8 +1,13 @@
 from camper import views
+from app_login import appLoginViews
 from django.urls import path
 
 urlpatterns = [
     path('', views.index, name='index'),
     path('product/', views.product, name='product'),
-    path('board/', views.board, name='board')
+    path('board/', views.board, name='board'),
+    
+    #app_login
+    path('signUpPage/', appLoginViews.signUpPage , name='signUpPage'),
+    path('loginPage/', appLoginViews.loginPage , name='loginPage')
 ]
