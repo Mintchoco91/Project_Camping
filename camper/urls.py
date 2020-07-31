@@ -4,7 +4,7 @@ from django.urls import path
 
 urlpatterns = [
     path('', views.index, name='index'),
-    path('product/', views.product, name='product'),
+    path('product/', views.productList, name='productList'),
     path('board/', views.board, name='board'),
     
     #app_login
