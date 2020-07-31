@@ -69,3 +69,4 @@ def board(request):
         members.append(dic)
     print(members)
     return render(request, 'camper/board.html', {'members': members})
+
