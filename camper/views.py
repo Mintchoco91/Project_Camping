@@ -70,7 +70,6 @@ def board(request):
     print(members)
     return render(request, 'camper/board.html', {'members': members})
 
-
 def productList(request):
     cursor = connection.cursor()
     sql = "select * from PRODUCT"
