@@ -64,7 +64,7 @@ mysql -p
 # Cursor
 1.pip install PyMySQL
 
-
+install
 #alias
 path : cd /etc/bash.bashrc 
 별명 = '명령어'
