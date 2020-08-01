@@ -17,7 +17,7 @@ PW : 1234
 ### 메모
 1. 프로젝트 설정 -> URL설정 -> 포트 변경
 # [서버기동]
-2. python manage.py runserver 0.0.0.0:8000 //구름은 이렇게해줘야함
+2. python manage.py runserver 0.0.0.0:80 //구름은 이렇게해줘야함
 # [구름 IDE에서 브랜치처리]
 3_1. 새 브런치(local_branch) 생성
 3_2. 내용 수정 후 병합하기.
@@ -35,9 +35,14 @@ django-admin startproject [프로젝트명]
 Python3 manage.py startapp [앱이름]
 
 # 모델 작성 후 테이블 생성
-python3 manage.py makemigrations
+python3 manage.py makemigrations [앱이름]
 python3 manage.py migrate
 
+# 마이그레이션 적용 현황 확인
+python manage.py showmigrations app-name
+#sql적용된거 내용 확인
+python manage.py sqlmigrate [앱이름] [번호]
+ ex)python manage.py sqlmigrate polls 0001
 
 # *서버 실행 
 python3 manage.py runserver 0.0.0.0:8000
@@ -58,3 +63,9 @@ mysql -p
 
 # Cursor
 1.pip install PyMySQL
+
+
+#alias
+path : cd /etc/bash.bashrc 
+별명 = '명령어'
+ex) stary='python manage.py runserver 0.0.0.0:80'
