@@ -65,4 +65,4 @@ install
 #alias
 path : cd /etc/bash.bashrc 
 별명 = '명령어'
-ex) stary='python manage.py runserver 0.0.0.0:80'
+ex) alias start='python manage.py runserver 0.0.0.0:80'
