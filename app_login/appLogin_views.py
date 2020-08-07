@@ -1,11 +1,13 @@
 from django.shortcuts import render
 from django.db import connection
+from django.contrib import messages
+from camper import templates
 
 def loginPage(request):
-    return render(request, 'login.html')
+    return render(request, 'app_login/login.html')
 
 def signUpPage(request):
-    return render(request, 'signUp.html')
+    return render(request, 'app_login/signUp.html')
 
 def signUp(request):
     returnPage = "signUp.html"
@@ -22,7 +24,7 @@ def signUp(request):
             sql += "('"+ request.POST['id'] + "','" + request.POST['pw'] + "','" + request.POST['name'] + "',NOW())"
             cursor.execute(sql)        
             connection.commit()
-            returnPage = "login.html"
+            returnPage = "app_login/login.html"
         else:
             print("Exist")
             
@@ -34,7 +36,8 @@ def signUp(request):
 
 
 def login(request):
-    returnPage = "login.html"
+    returnPage = "app_login/login.html"
+    blError = True
     
     try:
         cursor = connection.cursor()
@@ -45,13 +48,15 @@ def login(request):
         exist = cursor.fetchone()
         
         if exist[0] == 0:
-            print("fail")
+            returnMsg = "로그인 실패. ID/PW를 확인해주세요."
         else:
             #메인페이지로 보내줘야함
-            returnPage = "../camper/camper/index.html"
+            returnMsg = "";
+            blError = False
+            returnPage = "camper/index.html"
             
     except:
-        print("DB ERR!!")
+        returnMsg = "DB 에러!!관리자에게 문의하세요."
     finally:
         connection.close()    
-    return render(request, returnPage)
+    return render(request, returnPage, {returnMsg : returnMsg, blError : blError})
