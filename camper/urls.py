@@ -11,5 +11,7 @@ urlpatterns = [
     path('signUpPage/', appLogin_views.signUpPage , name='signUpPage'),
     path('signUp/', appLogin_views.signUp , name='signUp'),
     path('loginPage/', appLogin_views.loginPage , name='loginPage'),
-    path('login/', appLogin_views.login , name='login')
+    path('login/', appLogin_views.login , name='login'),
+    path('logout/', appLogin_views.logout , name='logout')
+
 ]

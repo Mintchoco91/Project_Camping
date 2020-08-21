@@ -25,10 +25,10 @@
         {% csrf_token %}
         <table>
             <tr>
-                <td style="colspan=2">ID : <input type="text" name = "id"></td>
+                <td style="colspan=2">ID : <input type="text" name = "id" value="sampleId"></td>
             </tr>        
             <tr>
-                <td style="colspan=2">PW : <input type="password" name = "pw"></td>
+                <td style="colspan=2">PW : <input type="password" name = "pw" value="0000"></td>
             </tr>       
             <tr>
                 <td><input type="submit" value ="로그인"><input type="button" onclick="location.href='../'" value="돌아가기"></td>
@@ -40,5 +40,7 @@
 </html>
 
 <script>
-   
+   if("{{returnMsg}}" != ""){
+       alert("{{returnMsg}}");
+   }
 </script>
