@@ -1,9 +1,20 @@
 from django.shortcuts import render
 from django.db import connection
+from app_login import appLogin_views
+from django.contrib import messages
+from django.shortcuts import redirect
 
+def must_login(func):
+    def wrapper(request,*args, **kwargs):
+        try:
+            print(request.session['id']);
+        except:
+            return redirect("/camper/loginPage")
+        
+        return func(request,*args, **kwargs)
+        
+    return wrapper
 
-
-# Create your views here.
 def index(request):
     return render(request, 'camper/index.html')
 
