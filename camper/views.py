@@ -3,6 +3,7 @@ from django.db import connection
 from app_login import appLogin_views
 from django.contrib import messages
 from django.shortcuts import redirect
+import pandas as pd
 
 def must_login(func):
     def wrapper(request,*args, **kwargs):
@@ -69,17 +70,19 @@ def db_insertMember(user_id, user_pw, user,name):
 #     return render(request, 'camper/board.html',)
 
 
-def board(request):
+def reviewBoard(request):
     cursor = connection.cursor()
-    sql = "select * from MEMBER"
+    sql = "select * from review_table"
     cursor.execute(sql)
     rows = cursor.fetchall()
-    members = []
+    reviewInfo = []
+    print(rows)
     for row in rows:
-        dic = {'id': row[1], 'name': row[3]}
-        members.append(dic)
-    print(members)
-    return render(request, 'camper/board.html', {'members': members})
+        dic = {'id': row[0], 'item_no': row[1], 'subject': row[2],
+               'contents': row[3], 'created_id': row[4], 'created_at': row[5]}
+        reviewInfo.append(dic)
+    print(reviewInfo)
+    return render(request, 'camper/review_board.html', {'reviewInfo': reviewInfo})
 
 def productList(request):
     cursor = connection.cursor()

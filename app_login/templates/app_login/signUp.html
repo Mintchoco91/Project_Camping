@@ -19,25 +19,65 @@
         
         <link rel="stylesheet" href="{% static 'css/main.css' %}" />
 	</head>
-<body>
+    <!-- Header -->
+    <header id="header">
+        <h1><a href="{% url 'index' %}">Easy Camp</a></h1>
+        <nav id="nav">
+            <ul>
+                <li class="special">
+                    <a href="#menu" class="menuToggle"><span>Menu</span></a>
+                    <div id="menu">
+                        {% if request.session.id %}
+                        <ul>
+                            <li>{{request.session.id}}님 안녕하세요.</li>
+                        </ul>
+                        {% endif %}
+                        <ul>
+                            <li><a href="#">Home</a></li>
+                            <li><a href="#">Generic</a></li>
+                            <li><a href="#">Elements</a></li>
+                            <li><a href="./reviewBoard">Review</a></li>
+                            {% if request.session.id %}
+                            <li><a href="./logout">Logout</a></li>
+                            {% else %}
+                            <li><a href="./loginPage">Login</a></li>
+                            <li><a href="./signUpPage">Sign Up</a></li>
+                            {% endif %}
+                        </ul>
+                    </div>
+                </li>
+            </ul>
+        </nav>
+    </header>
     
-    <form action="../signUp/" method="post">
-        {% csrf_token %}
-        <table>
-            <tr>
-                <td style="colspan=2">ID : <input type="text" name = "id"></td>
-            </tr>        
-            <tr>
-                <td style="colspan=2">PW : <input type="password" name = "pw"></td>
-            </tr>       
-            <tr>
-                <td style="colspan=2">이름 : <input type="text" name = "name"></td>
-            </tr>       
-            <tr>
-                <td><input type="submit" value ="회원가입"><input type="button" onclick="location.href='../'" value="돌아가기"></td>
-            </tr>        
-        </table>
-    </form>
-    
-</body>
+    <body>
+        <div style="height:50px;"></div>
+        <form action="../signUp/" method="post">
+            {% csrf_token %}
+            <table>
+                <tr>
+                    <td style="colspan=2">ID : <input type="text" name = "id"></td>
+                </tr>        
+                <tr>
+                    <td style="colspan=2">PW : <input type="password" name = "pw"></td>
+                </tr>       
+                <tr>
+                    <td style="colspan=2">이름 : <input type="text" name = "name"></td>
+                </tr>       
+                <tr>
+                    <td>
+                        <input type="submit" value ="회원가입"><input type="button" onclick="location.href='../'" value="돌아가기">                </td>
+                </tr>        
+            </table>
+        </form>
+
+    <!-- Scripts -->
+    <script src="{% static 'js/jquery.scrollex.min.js' %}"></script>
+    <script src="{% static 'js/jquery.scrolly.min.js' %}"></script>
+    <script src="{% static 'js/browser.min.js' %}"></script>
+    <script src="{% static 'js/breakpoints.min.js' %}"></script>
+    <script src="{% static 'js/util.js' %}"></script>
+    <script src="{% static 'js/main.js' %}"></script>
+
+    </body>
 </html>

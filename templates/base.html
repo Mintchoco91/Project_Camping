@@ -41,13 +41,13 @@
 											<li><a href="#">Home</a></li>
 											<li><a href="#">Generic</a></li>
 											<li><a href="#">Elements</a></li>
+											<li><a href="./reviewBoard">Review</a></li>
                                             {% if request.session.id %}
 											<li><a href="./logout">Logout</a></li>
                                             {% else %}
-											<li><a href="./loginPage">Log In</a></li>
+											<li><a href="./loginPage">Login</a></li>
 											<li><a href="./signUpPage">Sign Up</a></li>
                                             {% endif %}
-											<li><a href="./board">Review</a></li>
 										</ul>
 									</div>
 								</li>
@@ -80,13 +80,12 @@
 			</div>
 
 		<!-- Scripts -->
-			
-			<script src="{% static 'js/jquery.scrollex.min.js' %}"></script>
-			<script src="{% static 'js/jquery.scrolly.min.js' %}"></script>
-			<script src="{% static 'js/browser.min.js' %}"></script>
-			<script src="{% static 'js/breakpoints.min.js' %}"></script>
-			<script src="{% static 'js/util.js' %}"></script>
-			<script src="{% static 'js/main.js' %}"></script>
+        <script src="{% static 'js/jquery.scrollex.min.js' %}"></script>
+        <script src="{% static 'js/jquery.scrolly.min.js' %}"></script>
+        <script src="{% static 'js/browser.min.js' %}"></script>
+        <script src="{% static 'js/breakpoints.min.js' %}"></script>
+        <script src="{% static 'js/util.js' %}"></script>
+        <script src="{% static 'js/main.js' %}"></script>
          
 
 	</body>
