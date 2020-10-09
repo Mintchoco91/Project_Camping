@@ -1,7 +1,7 @@
 from django.db import models
 
 class Product(models.Model):
-    id = models.AutoField(db_column='ID', primary_key=True)  # Field name made lowercase.
+    no = models.AutoField(db_column='NO', primary_key=True)  # Field name made lowercase.
     price = models.IntegerField(db_column='PRICE')  # Field name made lowercase.
     name = models.CharField(db_column='NAME', max_length=50)  # Field name made lowercase.
     category = models.CharField(db_column='CATEGORY', max_length=30)  # Field name made lowercase.

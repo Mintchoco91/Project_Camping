@@ -11,7 +11,7 @@
                     {% for product in products %}
                         <div class="col-4" style="padding:0; border:1px solid black;">
                             <span class="image fit" style="border: 1px solid red; margin:0">
-                                <a href="{% url 'productDetail' no=product.no%}">
+                                <a href="{% url 'productDetail' no=product.no category=category%}">
                                     <img src="{{ product.thumbnail_img }}" >
                                 </a>
                             </span>

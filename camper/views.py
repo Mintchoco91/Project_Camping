@@ -85,19 +85,12 @@ def reviewBoard(request):
     print(reviewInfo)
     return render(request, 'camper/review_board.html', {'reviewInfo': reviewInfo})
 
-def productList(request):
-    cursor = connection.cursor()
-    sql = "select * from PRODUCT"
-    cursor.execute(sql)
-    rows = cursor.fetchall()
-    images = []
-    for row in rows:
-        images.append(row[4])
-    print(images)
-    return render(request, 'camper/product_list.html', {'images': images})
+# ------------------------------상품 관련
+def productList(request, category):
+    products = Product.objects.filter(category=category)
+    return render(request, 'camper/product_list.html', {'category': category, 'products': products})
 
-def productDetail(request, no):
-    
+def productDetail(request, category, no):
     product = Product.objects.get(pk=no)
     return render(request, 'camper/product_detail.html', {'product': product})
 
