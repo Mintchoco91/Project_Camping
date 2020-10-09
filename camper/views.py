@@ -4,6 +4,7 @@ from app_login import appLogin_views
 from django.contrib import messages
 from django.shortcuts import redirect
 import pandas as pd
+from camper.models import Product
 
 def must_login(func):
     def wrapper(request,*args, **kwargs):
@@ -94,3 +95,10 @@ def productList(request):
         images.append(row[4])
     print(images)
     return render(request, 'camper/product_list.html', {'images': images})
+
+def productDetail(request, no):
+    
+    product = Product.objects.get(pk=no)
+    return render(request, 'camper/product_detail.html', {'product': product})
+
+

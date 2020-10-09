@@ -8,11 +8,15 @@
             <div class="box" style="border: 2px solid black;">
                 <div class="row gtr-50 gtr-uniform">
                     
-                    {% for image in images %}
+                    {% for product in products %}
                         <div class="col-4" style="padding:0; border:1px solid black;">
-                            <span class="image fit" style="border: 1px solid red">
-                                <img src="{{image}}" >
+                            <span class="image fit" style="border: 1px solid red; margin:0">
+                                <a href="{% url 'productDetail' no=product.no%}">
+                                    <img src="{{ product.thumbnail_img }}" >
+                                </a>
                             </span>
+                            <p style="margin:0">{{ product.name}}</p>
+                            <p>{{ product.price}}원</p>
                     </div>
                     {% endfor %}
                     
@@ -26,8 +30,5 @@
     </div>
     
 </section>
-
-
-
 
 {% endblock content %}
