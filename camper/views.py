@@ -70,7 +70,10 @@ def db_insertMember(user_id, user_pw, user,name):
 #     return render(request, 'camper/board.html',)
 
 
-def reviewBoard(request):
+def reviewBoardList(request):
+        if 'searchType' not in request.POST:
+            print("!!")
+
     cursor = connection.cursor()
     sql = "select * from review_table"
     cursor.execute(sql)
@@ -82,7 +85,7 @@ def reviewBoard(request):
                'contents': row[3], 'created_id': row[4], 'created_at': row[5]}
         reviewInfo.append(dic)
     print(reviewInfo)
-    return render(request, 'camper/review_board.html', {'reviewInfo': reviewInfo})
+    return render(request, 'camper/review_board_list.html', {'reviewInfo': reviewInfo})
 
 def productList(request):
     cursor = connection.cursor()
