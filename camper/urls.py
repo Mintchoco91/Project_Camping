@@ -4,7 +4,8 @@ from django.urls import path
 
 urlpatterns = [
     path('', views.index, name='index'),
-    path('reviewBoard/', views.reviewBoard, name='reviewBoard'),
+    path('reviewList/', views.reviewList, name='reviewList'),
+    path('reviewDetail/<int:reviewId>/', views.reviewDetail, name='reviewDetail'),
     
     #app_login
     path('signUpPage/', appLogin_views.signUpPage , name='signUpPage'),

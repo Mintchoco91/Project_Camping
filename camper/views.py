@@ -73,7 +73,7 @@ def db_insertMember(user_id, user_pw, user,name):
 #     return render(request, 'camper/board.html',)
 
 
-def reviewBoard(request):
+def reviewList(request):
     cursor = connection.cursor()
     sql = "select * from review_table"
     cursor.execute(sql)
@@ -85,7 +85,20 @@ def reviewBoard(request):
                'contents': row[3], 'created_id': row[4], 'created_at': row[5]}
         reviewInfo.append(dic)
     print(reviewInfo)
-    return render(request, 'camper/review_board.html', {'reviewInfo': reviewInfo})
+    return render(request, 'camper/review_list.html', {'reviewInfo': reviewInfo})
+
+
+def reviewDetail(request, reviewId):
+    cursor = connection.cursor()
+    sql = "select * from review_table where id="+str(reviewId)
+    cursor.execute(sql)
+    rows = cursor.fetchall()
+    reviewDetailInfo = []
+    for row in rows:
+        dic = {'id': row[0], 'item_no': row[1], 'subject': row[2],
+               'contents': row[3], 'created_id': row[4], 'created_at': row[5]}
+        reviewDetailInfo.append(dic)
+    return render(request, 'camper/review_detail.html', {'reviewDetailInfo': reviewDetailInfo})
 
 # ------------------------------상품 관련
 def productList(request, category):
