@@ -43,7 +43,7 @@
                $.ajax({            
                     url: "{% url 'addItemToCart' %}", // ajax로 데이터 교환할 페이지 주소
                     method: "POST",
-                    data: {name:'상품명', price:'가격', amount:'수량'}
+                    data: {no:{{product.no}}, amount:'수량'}
                 }).done(function() {
                     if(confirm("상품을 장바구니에 추가하였습니다. 장바구니로 이동하시겠습니까?")) {
                         location.href = "{% url 'myCart' %}";

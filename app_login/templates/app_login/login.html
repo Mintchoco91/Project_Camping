@@ -1,20 +1,6 @@
-<!DOCTYPE HTML>
-<!--
-	Spectral by HTML5 UP
-	html5up.net | @ajlkn
-	Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
--->
-<html>
-	<head>
-		<title>로그인</title>
-		<!-- header_setting -->
-        {% include 'camper/common/header_setting.html' %}
-	</head>
-    
-    <!-- header_menu -->
-    {% include 'camper/common/header_menu.html' %}
-    
-    <body>
+{% extends "base.html" %}
+{% load static %}
+{% block content %}
         <div style="height:50px;"></div>
 
         <form action="../login/" method="post">
@@ -35,11 +21,10 @@
             </table>
         </form>
 
-    </body>
-</html>
-
 <script>
    if("{{returnMsg}}" != ""){
        alert("{{returnMsg}}");
    }
 </script>
+
+{% endblock content %}

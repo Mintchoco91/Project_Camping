@@ -1,15 +1,7 @@
-<!DOCTYPE html>
-<html lang="en">
-	<head>
-		<title>리뷰게시판</title>
-		<!-- header_setting -->
-        {% include 'camper/common/header_setting.html' %}
-	</head>
-    
-    <!-- header_menu -->
-    {% include 'camper/common/header_menu.html' %}
-    
-    <body>
+{% extends "base.html" %}
+{% load static %}
+{% block content %}
+  
         <div style="height:50px;"></div>
         <table>
             <tr>
@@ -27,5 +19,5 @@
             {% endfor %}
 
         </table>
-    </body>
-</html>
+    
+{% endblock content %}
