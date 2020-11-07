@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+{% load static %}
+{% block content %}
+
+        <div style="height:50px;"></div>
+        <table>
+            {% for info in reviewDetailInfo %}
+            <tr>
+                <td colspan=2>{{info.subject}}</td>
+            </tr>
+            <tr>
+                <td>{{info.created_id}}</td>
+                <td>{{info.created_at}}</td>
+            </tr>
+            <tr>
+                <td colspan=2><textarea style="height:300px">{{info.contents}}</textarea></td>
+            </tr>
+            {% endfor %}
+        </table>
+    
+{% endblock content %}
