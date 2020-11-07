@@ -5,6 +5,8 @@ from django.contrib import messages
 from django.shortcuts import redirect
 import pandas as pd
 from camper.models import Product
+from django.views.decorators.csrf import csrf_exempt
+from django.http import HttpResponse, JsonResponse
 
 def must_login(func):
     def wrapper(request,*args, **kwargs):
@@ -94,4 +96,15 @@ def productDetail(request, category, no):
     product = Product.objects.get(pk=no)
     return render(request, 'camper/product_detail.html', {'product': product})
 
+#------장바구니 관련 -----------
+@csrf_exempt
+def addItemToCart(request):
+    print(request.POST)
+    HttpResponse.set_cookie('cart_item', '1/2|')
+    return JsonResponse({'message': "성공"})
+
+def myCart(request):
+    return render(request, 'camper/cart.html')
+    
+    
 

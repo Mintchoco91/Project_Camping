@@ -7,7 +7,20 @@
         <section>
             <div class="box" style="border: 5px solid black;">
                 <div class="row gtr-50 gtr-uniform">
-                    
+                    <div style="display:flex; border:2px solid black; width:100%;">
+                        <img src="{{product.thumbnail_img}}" style="flex:1">
+                        <div style="border:1px solid black; flex:2">
+                            <p>
+                                {{product.name}}
+                            </p>
+                            <p>
+                                {{product.price}}원
+                            </p>
+                            <button id="button1">
+                                장바구니
+                            </button>
+                        </div>
+                    </div>
                     <div>
                         <img src="{{product.detail_img}}">
                     </div>
@@ -22,4 +35,47 @@
     </div>
     
 </section>
+
+<script type="text/javascript">
+        $(function() {
+            // 페이지 로드가 끝났을 때 추가하는 부분(대부분 이 안에 추가된다.)
+            $('#button1').click(function() {
+               $.ajax({            
+                    url: "{% url 'addItemToCart' %}", // ajax로 데이터 교환할 페이지 주소
+                    method: "POST",
+                    data: {name:'상품명', price:'가격', amount:'수량'}
+                }).done(function() {
+                    if(confirm("상품을 장바구니에 추가하였습니다. 장바구니로 이동하시겠습니까?")) {
+                        location.href = "{% url 'myCart' %}";
+                    }
+                        
+                   
+                });
+            });
+        });
+
+        /*
+        데이터를 전송하는 페이지(HTML), 데이터를 전송받는 페이지(django view)
+        HTML - 회원가입, 좋아요 데이터 전송 
+        -> 장고측 뷰가 데이터를 받아 모델 처리, 로직 처리
+        -> 모델처리가 완료되면 메시지, 혹은 처리 결과 데이터를 다시 HTML로 전송
+        -> HTML은 응답받은 데이터를 가지고 화면에 정보 출력
+
+        $.ajax({
+            url: "클라이언트가 요청 보낼 서버의 URL 주소",
+            method:"POST",          // HTTP 요청 방식(GET, POST)
+            type: "json",           // 서버에서 보내줄 데이터의 타입(default값으로 json으로 되어있다.)
+            data: {name: "홍길동"}   // HTTP 요청과 함께 서버로 보낼 데이터
+
+        }).done(function(data) {    // HTTP 요청 성공 시, 요청한 데이터가 done() 메소드로 전달
+
+        }).fail(function(xhr, data) {     // HTTP 요청 실패 시, 오류와 상태에 관한 정보가 fail() 메소드로 전달
+
+        }).always(function(xhr, data) {   // HTTP 요청의 성공여부와는 상관없이 언제나 always()메소드 실행
+
+        });
+        */
+    </script>
+
+
 {% endblock content %}

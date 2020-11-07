@@ -119,3 +119,7 @@ STATIC_URL = '/static/'
 STATICFILES_DIRS = [
     os.path.join(BASE_DIR, 'static'),
 ]
+
+# iamport 사이트 > 시스템설정 > 내정보에서 IAMPORT_KEY, IAMPORT_SECRET 정보 입력
+IAMPORT_KEY = '7704612326799701'
+IAMPORT_SECRET = 'rPalM8VvRX0y8iRoUAkSll1Xai5SxHxYwIjjRfPJcQil8aJ3L3V6pX4zgasNRZMoI6IAlyjyoCTxMCAy'

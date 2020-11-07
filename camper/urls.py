@@ -14,7 +14,11 @@ urlpatterns = [
     path('logout/', appLogin_views.logout , name='logout'),
     
     #product
-    path('product/<str:category>', views.productList, name='productList'),
+    path('product/<str:category>/', views.productList, name='productList'),
     path('product/<str:category>/<int:no>', views.productDetail, name='productDetail'),
+    
+    #cart
+    path('cart/addItem', views.addItemToCart, name='addItemToCart'),
+    path('cart/', views.myCart, name='myCart'),
 
 ]

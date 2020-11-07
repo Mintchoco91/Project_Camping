@@ -39,7 +39,16 @@
                                         {% endif %}
 										<ul>
 											<li><a href="#">Home</a></li>
-											<li><a href="#">Generic</a></li>
+											<li>
+                                                <button class="dropdown-btn">
+                                                밀키트<i class="fa fa-caret-down"></i>
+                                                </button>
+                                                <div class="dropdown-container">
+                                                    <a href="{% url 'productList' category='한식' %}">한식</a>
+                                                    <a href="{% url 'productList' category='중식' %}">중식</a>
+                                                    <a href="{% url 'productList' category='일식' %}">일식</a>
+                                                </div>
+                                            </li>
 											<li><a href="#">Elements</a></li>
 											<li><a href="./reviewBoard">Review</a></li>
                                             {% if request.session.id %}
