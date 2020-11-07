@@ -99,9 +99,14 @@ def productDetail(request, category, no):
 #------장바구니 관련 -----------
 @csrf_exempt
 def addItemToCart(request):
-    print(request.POST)
-    HttpResponse.set_cookie('cart_item', '1/2|')
-    return JsonResponse({'message': "성공"})
+    pNo = request.POST['p_no']
+    amount = request.POST['amount']
+
+    res = JsonResponse({'success': True})
+    res.Cookies["cart_items"][pNo] = amount
+    
+    
+    return res
 
 def myCart(request):
     return render(request, 'camper/cart.html')

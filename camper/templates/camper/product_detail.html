@@ -16,6 +16,7 @@
                             <p>
                                 {{product.price}}원
                             </p>
+                            <input type="number" id="amount" value="1" min="1">
                             <button id="button1">
                                 장바구니
                             </button>
@@ -39,15 +40,23 @@
 <script type="text/javascript">
         $(function() {
             // 페이지 로드가 끝났을 때 추가하는 부분(대부분 이 안에 추가된다.)
+            
             $('#button1').click(function() {
+                var amount = $('#amount').val();
                $.ajax({            
                     url: "{% url 'addItemToCart' %}", // ajax로 데이터 교환할 페이지 주소
                     method: "POST",
-                    data: {no:{{product.no}}, amount:'수량'}
-                }).done(function() {
-                    if(confirm("상품을 장바구니에 추가하였습니다. 장바구니로 이동하시겠습니까?")) {
+                    data: {p_no:{{product.no}}, amount:amount}
+                }).done(function(data) {
+                   if(data.success) {
+                       if(confirm("상품을 장바구니에 추가하였습니다. 장바구니로 이동하시겠습니까?")) {
                         location.href = "{% url 'myCart' %}";
                     }
+                   } else {
+                       if(confirm("이미 장바구니에 추가된 상품입니다. 장바구니로 이동하시겠습니까?")) {
+                           location.href = "{% url 'myCart' %}";
+                       }
+                   }
                         
                    
                 });
