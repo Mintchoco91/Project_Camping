@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+{% load static %}
+{% block content %}
+  
+        <div style="height:50px;"></div>
+        <table>
+            <tr>
+                <td colspan="2" style="text-align:center;width:60%">제목</td>
+                <td style="text-align:left;width:20%">글쓴이</td>
+                <td style="text-align:center;width:20%">작성일</td>
+            </tr>
+            {% for info in reviewInfo %}
+            <tr>
+                <td style="text-align:center;width:20%">{{ info.id }}</td>
+                <td style="text-align:left;width:40%">
+                    <a href="/camper/reviewDetail/{{info.id}}">{{ info.subject }}</a>
+                </td>
+                <td style="text-align:left;width:20%">{{ info.created_id }}</td>
+                <td style="text-align:center;width:20%">{{ info.created_at }}</td>
+            </tr>
+            {% endfor %}
+
+        </table>
+    
+{% endblock content %}
