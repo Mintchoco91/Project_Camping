@@ -50,12 +50,12 @@
                                                 </div>
                                             </li>
 											<li><a href="#">Elements</a></li>
-											<li><a href="/camper/reviewList">Review</a></li>
+											<li><a href="{% url 'reviewList' %}">Review</a></li>
                                             {% if request.session.id %}
-                                             <li><a href="/camper/logout">Logout</a></li>
+                                             <li><a href="{% url 'logout' %}">Logout</a></li>
                                             {% else %}
-                                             <li><a href="/camper/loginPage">Login</a></li>
-                                             <li><a href="/camper/signUpPage">Sign Up</a></li>
+                                             <li><a href="{% url 'loginPage' %}">Login</a></li>
+                                             <li><a href="{% url 'signUpPage' %}">Sign Up</a></li>
                                             {% endif %}
 										</ul>
 									</div>

@@ -6,16 +6,20 @@
         <table>
             {% for info in reviewDetailInfo %}
             <tr>
-                <td colspan=2>{{info.subject}}</td>
+                <td style="width:50%">{{info.subject}}</td>
+                <td style="width:20%">{{info.created_id}}</td>
+                <td style="width:30%">{{info.created_at}}</td>
             </tr>
             <tr>
-                <td>{{info.created_id}}</td>
-                <td>{{info.created_at}}</td>
-            </tr>
-            <tr>
-                <td colspan=2><textarea style="height:300px">{{info.contents}}</textarea></td>
+                <td colspan=3><textarea style="height:300px" readonly>{{info.contents}}</textarea></td>
             </tr>
             {% endfor %}
+            
+            <tr>
+                <td colspan=3 align="center">
+                    <input type="button" value="목록으로" onclick="location.href='{% url 'reviewList' %}'">
+                </td>
+            </tr>
         </table>
     
 {% endblock content %}
