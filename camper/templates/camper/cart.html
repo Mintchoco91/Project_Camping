@@ -4,7 +4,23 @@
 {% block content %}
 <section class="wrapper style5">
     <div class="inner">
+        <p>
+                장바구니
+            </p>
+        <section>
+            
+            <table class="alt">
+                {% for item in cartList %}
+                <tr>
+                    <td><img src="{{ item.product.thumbnail_img }}" width='100' height='100'></td>
+                    <td>{{ item.product.name }}<br>{{ item.product.price }}</td>
+                    <td><input type='number' value={{ item.amount }}><br>{{ item.product.price}}</td>
+                    <td><button>삭제</button></td>
+                </tr>
+                {% endfor %}
+            </table>
         
+        </section>
     </div>
     
 </section>
