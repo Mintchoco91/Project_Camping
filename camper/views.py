@@ -7,6 +7,7 @@ import pandas as pd
 from camper.models import Product
 from django.views.decorators.csrf import csrf_exempt
 from django.http import HttpResponse, JsonResponse
+import re
 
 def must_login(func):
     def wrapper(request,*args, **kwargs):
@@ -101,15 +102,48 @@ def productDetail(request, category, no):
 def addItemToCart(request):
     pNo = request.POST['p_no']
     amount = request.POST['amount']
-
+    cartItems = ''
+    print(pNo)
+    print(amount)
+    
+    if 'cart_items' in request.COOKIES:
+        cartItems = request.COOKIES['cart_items']
+        print(cartItems)
+        match = re.search('|'+pNo+':', cartItems)
+        print(match)
+        if re.search('\|'+pNo+':', cartItems): #해당 아이템이 이미 장바구니에 있는 경우
+            print('a')
+            storedAmount = int(re.search('\|'+pNo+':(\d+)\|', cartItems).group(1))
+            cartItems = re.sub('(?<=\|'+pNo+':)(\d+)(?=\|)', str(storedAmount+int(amount)), cartItems)
+        else:
+            print('b')
+            cartItems += '|'+pNo+':'+amount+'|'
+    else: #쿠키에 장바구니 아이템이 하나도 없는 경우
+        cartItems = '|'+pNo+':'+amount+'|'
+    
     res = JsonResponse({'success': True})
-    res.Cookies["cart_items"][pNo] = amount
-    
-    
+    res.set_cookie('cart_items', cartItems)
     return res
 
 def myCart(request):
-    return render(request, 'camper/cart.html')
+    if 'cart_items' in request.COOKIES:
+        cart_item_list = []
+        cartItems = request.COOKIES['cart_items']
+        print(cartItems)
+        cartItemList = cartItems.split('|')
+        for item in cartItemList:
+            if item:
+                itemInfo = item.split(':')
+                itemId = int(itemInfo[0])
+                amount = itemInfo[1]
+                product = Product.objects.get(pk=itemId)
+                item_dict = {}
+                item_dict['product'] = product
+                item_dict['amount'] = amount
+                cart_item_list.append(item_dict)
+        print(cart_item_list)
+    # return JsonResponse({'success': True})
+    return render(request, 'camper/cart.html', {'cartList': cart_item_list})
     
     
 
