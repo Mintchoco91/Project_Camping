@@ -20,5 +20,8 @@ urlpatterns = [
     #cart
     path('cart/addItem', views.addItemToCart, name='addItemToCart'),
     path('cart/', views.myCart, name='myCart'),
+    path('cart/removeItem/<int:itemId>', views.removeCartItem, name='removeCartItem'),
+    path('cart/removeAll/', views.removeAll, name='removeAll'),
+    path('cart/changeAmount', views.changeAmount, name="changeAmount"),
 
 ]

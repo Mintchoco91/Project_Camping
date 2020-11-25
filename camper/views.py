@@ -6,7 +6,7 @@ from django.shortcuts import redirect
 import pandas as pd
 from camper.models import Product
 from django.views.decorators.csrf import csrf_exempt
-from django.http import HttpResponse, JsonResponse
+from django.http import HttpResponse, JsonResponse, HttpResponseRedirect
 import re
 
 def must_login(func):
@@ -126,10 +126,11 @@ def addItemToCart(request):
     return res
 
 def myCart(request):
+    cart_item_list = []
     if 'cart_items' in request.COOKIES:
-        cart_item_list = []
         cartItems = request.COOKIES['cart_items']
         print(cartItems)
+        total_price = 0
         cartItemList = cartItems.split('|')
         for item in cartItemList:
             if item:
@@ -141,9 +142,53 @@ def myCart(request):
                 item_dict['product'] = product
                 item_dict['amount'] = amount
                 cart_item_list.append(item_dict)
+                total_price += int(amount) * product.price
         print(cart_item_list)
     # return JsonResponse({'success': True})
-    return render(request, 'camper/cart.html', {'cartList': cart_item_list})
-    
-    
+    return render(request, 'camper/cart.html', {'cartList': cart_item_list, 'total_price': total_price})
 
+
+def removeCartItem(request, itemId):
+    print(itemId)
+    cartItems = request.COOKIES['cart_items']
+    cartItems = re.sub('\|'+str(itemId)+':\d+\|', '', cartItems)
+    print(cartItems)
+    #res = HttpResponseRedirect(reverse('myCart'))
+    res = redirect('myCart')
+    res.set_cookie('cart_items', cartItems)
+    return res
+
+
+def removeAll(request):
+    res = redirect('myCart')
+    res.delete_cookie('cart_items')
+    return res
+
+
+@csrf_exempt
+def changeAmount(request):
+    pNo = request.POST['pNo']
+    amount = request.POST['amount']
+    
+    if 'cart_items' in request.COOKIES:
+        cartItems = request.COOKIES['cart_items']
+        if re.search('\|'+pNo+':', cartItems): #해당 아이템이 이미 장바구니에 있는 경우
+            cartItems = re.sub('(?<=\|'+pNo+':)(\d+)(?=\|)', amount, cartItems)
+        else:
+            cartItems += '|'+pNo+':'+amount+'|'
+    else: #쿠키에 장바구니 아이템이 하나도 없는 경우
+        cartItems = '|'+pNo+':'+amount+'|'
+
+    total_price = 0
+    # cartItemList = cartItems.split('|')
+    # for item in cartItemList:
+    #     if item:
+    #         itemInfo = item.split(':')
+    #         itemId = int(itemInfo[0])
+    #         amount = itemInfo[1]
+    #         product = Product.objects.get(pk=itemId)
+    #         price = product.price
+    #         total_price += price * int(amount)
+    res = JsonResponse({'total': total_price})
+    res.set_cookie('cart_items', cartItems)
+    return res
