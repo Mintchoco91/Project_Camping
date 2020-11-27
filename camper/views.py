@@ -11,9 +11,7 @@ import re
 
 def must_login(func):
     def wrapper(request,*args, **kwargs):
-        try:
-            print(request.session['id']);
-        except:
+        if not request.session._session:
             return redirect("/camper/loginPage")
         
         return func(request,*args, **kwargs)
