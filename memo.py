@@ -66,3 +66,4 @@ install
 path : cd /etc/bash.bashrc 
 별명 = '명령어'
 ex) alias start='python manage.py runserver 0.0.0.0:80'
+* 설정 후 source ./bash.bashrc 입력해야 적용됨.
